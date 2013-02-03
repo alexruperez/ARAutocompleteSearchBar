@@ -4,7 +4,7 @@
 
 ARAutocompleteSearchBar is a subclass of UISearchBar that automatically displays text suggestions in real-time.  This is perfect for automatically suggesting the domain as a user types an email address.
 
-Inspired by [HTAutocompleteTextField](https://github.com/hoteltonight/HTAutocompleteTextField) by [HotelTonight](https://github.com/hoteltonight). You can see [HTAutocompleteTextField](https://github.com/hoteltonight/HTAutocompleteTextField) in action in the animated gif below or on [Youtube](http://youtu.be/lzqB4MXluvY):
+Inspired by [HotelTonight](https://github.com/hoteltonight)/[HTAutocompleteTextField](https://github.com/hoteltonight/HTAutocompleteTextField). You can see it in action in the animated gif below or on [Youtube](http://youtu.be/lzqB4MXluvY):
 
 <img src="https://raw.github.com/hoteltonight/HTAutocompleteTextField/master/demo.gif" alt="HotelTonight" title="HTAutocompleteTextField in action" style="display:block; margin: 10px auto 30px auto; align:center">
 
@@ -33,8 +33,9 @@ The data source is the brains of the autocomplete logic.  If you just want to au
 ### Autocompletion Data Source
 
 `ARAutocompleteManager` (included in the example project) provides email address autocompletion out of the box.  It comes with a list of the top email domains.  You may want to tailor this list of email domains to match your own customers, or you may want to write autocomplete logic for a different type of search bar (in the demo, names of colors are autocompleted).
+You can also autocomplete the keywords of the latest queries in the search bar, search something in the demo search bar, clear it and search again the same keywords.
 
-Alternatively, you may wish to create your own data source class and user the `autocompleteType` property to differentiate between fields with different data types.  A `ARAutocompleteSearchBars`'s data source must implement the following method, as part of the `ARAutocompleteDataSource` protocol.
+Alternatively, you may wish to create your own data source class and user the `autocompleteType` property to differentiate between fields with different data types.  A `ARAutocompleteSearchBar`'s data source must implement the following method, as part of the `ARAutocompleteDataSource` protocol.
 
     - (NSString*)searchBar:(ARAutocompleteSearchBar*)searchBar completionForPrefix:(NSString*)prefix ignoreCase:(BOOL)ignoreCase
 
