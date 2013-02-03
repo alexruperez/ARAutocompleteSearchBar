@@ -22,6 +22,9 @@
     // Set a default data source for all instances.  Otherwise, you can specify the data source on individual search bars via the autocompleteDataSource property
     [ARAutocompleteSearchBar setDefaultAutocompleteDataSource:[ARAutocompleteManager sharedManager]];
     
+    self.lastSearchBar.autocompleteType = ARAutocompleteTypeLast;
+    self.lastSearchBar.textField.delegate = self;
+    
     self.emailSearchBar.autocompleteType = ARAutocompleteTypeEmail;
     self.emailSearchBar.textField.delegate = self;
     
@@ -36,6 +39,7 @@
 
 - (void)viewDidUnload
 {
+    [self setLastSearchBar:nil];
     [self setEmailSearchBar:nil];
     [self setFavoriteColorSearchBar:nil];
     
@@ -44,13 +48,16 @@
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)sender
 {
-    [self.emailSearchBar resignFirstResponder];
-    [self.favoriteColorSearchBar resignFirstResponder];
+    [self textFieldShouldReturn:self.lastSearchBar.textField];
+    [self textFieldShouldReturn:self.emailSearchBar.textField];
+    [self textFieldShouldReturn:self.favoriteColorSearchBar.textField];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self handleSingleTap:nil];
+    if ((textField == self.lastSearchBar.textField) && ([textField.text length] > 0))
+        [[[ARAutocompleteManager sharedManager] lastAutocompleteArray] addObject:textField.text];
+    [textField resignFirstResponder];
     return YES;
 }
 

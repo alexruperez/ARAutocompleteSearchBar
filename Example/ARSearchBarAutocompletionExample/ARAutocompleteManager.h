@@ -12,11 +12,14 @@
 #import "ARAutocompleteSearchBar.h"
 
 typedef enum {
+    ARAutocompleteTypeLast,
     ARAutocompleteTypeEmail, // Default
     ARAutocompleteTypeColor,
 } ARAutocompleteType;
 
 @interface ARAutocompleteManager : NSObject <ARAutocompleteDataSource>
+
+@property (strong, nonatomic) NSMutableArray *lastAutocompleteArray;
 
 + (ARAutocompleteManager *)sharedManager;
 

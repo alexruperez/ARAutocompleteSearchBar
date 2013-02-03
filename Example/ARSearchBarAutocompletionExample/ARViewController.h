@@ -11,6 +11,7 @@
 
 @interface ARViewController : UIViewController <UITextFieldDelegate>
 
+@property (unsafe_unretained, nonatomic) IBOutlet ARAutocompleteSearchBar *lastSearchBar;
 @property (unsafe_unretained, nonatomic) IBOutlet ARAutocompleteSearchBar *emailSearchBar;
 @property (unsafe_unretained, nonatomic) IBOutlet ARAutocompleteSearchBar *favoriteColorSearchBar;
 

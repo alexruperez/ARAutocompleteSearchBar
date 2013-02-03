@@ -304,6 +304,43 @@ static ARAutocompleteManager *sharedManager;
 
         }
     }
+    else if (searchBar.autocompleteType == ARAutocompleteTypeLast)
+    {
+        static dispatch_once_t lastOnceToken;
+        dispatch_once(&lastOnceToken, ^
+                      {
+                          self.lastAutocompleteArray = [[NSMutableArray alloc] init];
+                      });
+        
+        NSString *stringToLookFor;
+        if (ignoreCase)
+        {
+            stringToLookFor = [prefix lowercaseString];
+        }
+        else
+        {
+            stringToLookFor = prefix;
+        }
+        
+        for (NSString *stringFromReference in self.lastAutocompleteArray)
+        {
+            NSString *stringToCompare;
+            if (ignoreCase)
+            {
+                stringToCompare = [stringFromReference lowercaseString];
+            }
+            else
+            {
+                stringToCompare = stringFromReference;
+            }
+            
+            if ([stringToCompare hasPrefix:stringToLookFor])
+            {
+                return [stringFromReference stringByReplacingCharactersInRange:[stringToCompare rangeOfString:stringToLookFor] withString:@""];
+            }
+            
+        }
+    }
 
     return @"";
 }

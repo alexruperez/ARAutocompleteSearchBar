@@ -42,6 +42,8 @@ static NSObject<ARAutocompleteDataSource> *DefaultAutocompleteDataSource = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidBeginEditingNotification object:self.textField];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self.textField];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidEndEditingNotification object:self.textField];
 }
 
 - (void)setupAutocompleteSearchBar
@@ -70,6 +72,8 @@ static NSObject<ARAutocompleteDataSource> *DefaultAutocompleteDataSource = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeFirstResponder) name:UITextFieldTextDidBeginEditingNotification object:self.textField];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ar_textDidChange:) name:UITextFieldTextDidChangeNotification object:self.textField];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resignFirstResponder) name:UITextFieldTextDidEndEditingNotification object:self.textField];
 }
 
 #pragma mark - Configuration
@@ -104,7 +108,7 @@ static NSObject<ARAutocompleteDataSource> *DefaultAutocompleteDataSource = nil;
 
 - (BOOL)resignFirstResponder
 {
-    if ((self.isFirstResponder) && (!self.autocompleteDisabled))
+    if (!self.autocompleteDisabled)
     {
         self.autocompleteLabel.hidden = YES;
         
