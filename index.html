@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="ARAutocompleteSearchBar : ARAutocompleteSearchBar is a subclass of UISearchBar that automatically displays text suggestions in real-time." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>ARAutocompleteSearchBar</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/alexruperez/ARAutocompleteSearchBar">View on GitHub</a>
+
+          <h1 id="project_title">ARAutocompleteSearchBar</h1>
+          <h2 id="project_tagline">ARAutocompleteSearchBar is a subclass of UISearchBar that automatically displays text suggestions in real-time.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/alexruperez/ARAutocompleteSearchBar/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/alexruperez/ARAutocompleteSearchBar/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>ARAutocompleteSearchBar</h1>
+
+<h2>Overview</h2>
+
+<p>ARAutocompleteSearchBar is a subclass of UISearchBar that automatically displays text suggestions in real-time.  This is perfect for automatically suggesting the domain as a user types an email address.</p>
+
+<p>Inspired by <a href="https://github.com/hoteltonight">HotelTonight</a>/<a href="https://github.com/hoteltonight/HTAutocompleteTextField">HTAutocompleteTextField</a>. You can see it in action in the animated gif below or on <a href="http://youtu.be/lzqB4MXluvY">Youtube</a>:</p>
+
+<p><img src="https://raw.github.com/hoteltonight/HTAutocompleteTextField/master/demo.gif" alt="HotelTonight" title="HTAutocompleteTextField in action"></p>
+
+<h1>Usage</h1>
+
+<h2>Installation</h2>
+
+<h3>Add the following files to your project:</h3>
+
+<ul>
+<li><code>ARAutocompleteSearchBar.m</code></li>
+<li><code>ARAutocompleteSearchBar.h</code></li>
+<li>
+<code>ARAutocompleteManager.m</code> and <code>ARAutocompleteManager.h</code>
+</li>
+</ul><h2>Quickstart Guide</h2>
+
+<p>Create an <code>ARAutocompleteSearchBar</code> instance exactly as as you would <code>UISearchBar</code>.  You can do eith either programmitcally or in Interface Builder.  Programmatically, this looks like:</p>
+
+<pre><code>ARAutocompleteSearchBar *searchBar = [[ARAutocompleteSearchBar alloc] initWithFrame:CGRectMake(0,0,320,44)];
+</code></pre>
+
+<p>The data source is the brains of the autocomplete logic.  If you just want to autocomplete email addresses, use <code>ARAutocompleteManager</code> from the example project as follows:</p>
+
+<pre><code>searchBar.autocompleteDataSource = [ARAutocompleteManager sharedManager];
+searchBar.autocompleteType = ARAutocompleteTypeEmail;
+</code></pre>
+
+<h2>Customization</h2>
+
+<h3>Autocompletion Data Source</h3>
+
+<p><code>ARAutocompleteManager</code> (included in the example project) provides email address autocompletion out of the box.  It comes with a list of the top email domains.  You may want to tailor this list of email domains to match your own customers, or you may want to write autocomplete logic for a different type of search bar (in the demo, names of colors are autocompleted).
+You can also autocomplete the keywords of the latest queries in the search bar, search something in the demo search bar, clear it and search again the same keywords.</p>
+
+<p>Alternatively, you may wish to create your own data source class and user the <code>autocompleteType</code> property to differentiate between fields with different data types.  A <code>ARAutocompleteSearchBar</code>'s data source must implement the following method, as part of the <code>ARAutocompleteDataSource</code> protocol.</p>
+
+<pre><code>- (NSString*)searchBar:(ARAutocompleteSearchBar*)searchBar completionForPrefix:(NSString*)prefix ignoreCase:(BOOL)ignoreCase
+</code></pre>
+
+<p>You may also set a default <code>dataSource</code> for all instances of <code>ARAutocompleteSearchBar</code>.  In the example project, we use a <code>ARAutocompleteManager</code> singleton:</p>
+
+<pre><code> [autocompleteTextOffset setDefaultAutocompleteDataSource:[ARAutocompleteManager sharedManager]];
+</code></pre>
+
+<h3>Positioning and Formatting</h3>
+
+<p>To adjust the position of the autocomplete label by a fixed amount, set <code>autocompleteTextOffset</code>:</p>
+
+<pre><code>searchBar.autocompleteTextOffset = CGPointMake(10.0, 10.0);
+</code></pre>
+
+<p>For more dynamic positioning of the autocomplete label, subclass <code>ARAutocompleteSearchBar</code> and override <code>- (CGRect)autocompleteRectForBounds:(CGRect)bounds</code>.</p>
+
+<p>To adjust the properties (i.e. <code>font</code>, <code>textColor</code>) of the autocomplete label, do so via the `[ARAutocompleteSearchBar autocompleteLabel] property.</p>
+
+<pre><code>searchBar.autocompleteLabel.textColor = [UIColor grayColor];
+</code></pre>
+
+<h1>Etc.</h1>
+
+<ul>
+<li>Use this in your apps whenever you can, particularly email addresses -- your users will appreciate it!</li>
+<li>Contributions are very welcome.</li>
+<li>Known Issues: Clear button not working yet...</li>
+<li>Attribution is appreciated (let's spread the word!), but not mandatory.</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">ARAutocompleteSearchBar maintained by <a href="https://github.com/alexruperez">alexruperez</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
